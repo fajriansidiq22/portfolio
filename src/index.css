@@ -1,0 +1,259 @@
+@import "tailwindcss";
+
+/* ── Tailwind v4 Theme Tokens ── */
+@theme {
+  --color-background: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-container-lowest: var(--surface-lowest);
+  --color-surface-container-low: var(--surface-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-high);
+  --color-surface-container-highest: var(--surface-highest);
+  --color-surface-variant: var(--surface-variant);
+
+  --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
+  --color-primary-fixed: var(--primary-fixed);
+  --color-primary-fixed-dim: var(--primary-fixed-dim);
+  --color-on-primary: var(--on-primary);
+
+  --color-secondary: var(--secondary);
+
+  /* 3 Consistent Text Colors */
+  --color-on-surface: var(--on-surface);                 /* Color 1: Primary heading/text */
+  --color-on-surface-variant: var(--on-surface-variant); /* Color 2: Muted / secondary text */
+  /* Color 3 is --color-primary (Accent) */
+
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-full: 9999px;
+}
+
+/* ── Light Mode Tokens (Clean Cosmic Starlight) ── */
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-dim: #f1f5f9;
+  --surface-bright: #ffffff;
+  --surface-lowest: #ffffff;
+  --surface-low: #f8fafc;
+  --surface-container: #f1f5f9;
+  --surface-high: #e2e8f0;
+  --surface-highest: #cbd5e1;
+  --surface-variant: #e2e8f0;
+
+  --primary: #0284c7;
+  --primary-container: #e0f2fe;
+  --primary-fixed: #0369a1;
+  --primary-fixed-dim: #0284c7;
+  --on-primary: #ffffff;
+
+  --secondary: #0d9488;
+
+  /* 3 Consistent Text Colors in Light Mode */
+  --on-surface: #0f172a;           /* Color 1: Deep Navy / Almost Black */
+  --on-surface-variant: #64748b;   /* Color 2: Balanced Slate Muted */
+
+  --outline: #94a3b8;
+  --outline-variant: rgba(15, 23, 42, 0.08);
+}
+
+/* ── Dark Mode Tokens (Deep Galaxy Space) ── */
+.dark {
+  --bg: #051424;
+  --surface: #051424;
+  --surface-dim: #020b14;
+  --surface-bright: #1b2e45;
+  --surface-lowest: #020912;
+  --surface-low: #091a2c;
+  --surface-container: #0e2238;
+  --surface-high: #152d47;
+  --surface-highest: #1d3957;
+  --surface-variant: #1a334e;
+
+  --primary: #38bdf8;
+  --primary-container: #0369a1;
+  --primary-fixed: #bae6fd;
+  --primary-fixed-dim: #7bd0ff;
+  --on-primary: #002b3d;
+
+  --secondary: #2dd4bf;
+
+  /* 3 Consistent Text Colors in Dark Mode */
+  --on-surface: #f8fafc;           /* Color 1: Crisp Clean White */
+  --on-surface-variant: #94a3b8;   /* Color 2: Legible Slate Gray */
+
+  --outline: #64748b;
+  --outline-variant: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Base Styles ── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    overscroll-behavior: none;
+    background-color: var(--color-background);
+    color: var(--color-on-surface);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.2);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.4);
+  }
+}
+
+/* ── Falling Comets Animation (Smooth & Subtle) ── */
+@keyframes shootingComet {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-38deg);
+    opacity: 0;
+  }
+  1.5% {
+    opacity: 1;
+  }
+  14% {
+    transform: translate3d(-1100px, 860px, 0) rotate(-38deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(-1100px, 860px, 0) rotate(-38deg);
+    opacity: 0;
+  }
+}
+
+.comet-trail {
+  position: absolute;
+  width: 130px;
+  height: 2px;
+  background: linear-gradient(to right, rgba(56, 189, 248, 1), rgba(56, 189, 248, 0.3), transparent);
+  border-radius: 9999px;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.7));
+  animation: shootingComet ease-out infinite;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.comet-trail::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.9), 0 0 12px 3px rgba(56, 189, 248, 0.8);
+}
+
+/* ── Typewriter Cursor Blink ── */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-cursor {
+  animation: cursorBlink 0.8s infinite;
+}
+
+/* ── Falling Comets Animation (Smooth & Subtle) ── */
+@keyframes shootingComet {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-38deg);
+    opacity: 0;
+  }
+  1.5% {
+    opacity: 1;
+  }
+  14% {
+    transform: translate3d(-1100px, 860px, 0) rotate(-38deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(-1100px, 860px, 0) rotate(-38deg);
+    opacity: 0;
+  }
+}
+
+.comet-trail {
+  position: absolute;
+  width: 130px;
+  height: 2px;
+  background: linear-gradient(to right, rgba(56, 189, 248, 1), rgba(56, 189, 248, 0.3), transparent);
+  border-radius: 9999px;
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.7));
+  animation: shootingComet ease-out infinite;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.comet-trail::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.9), 0 0 12px 3px rgba(56, 189, 248, 0.8);
+}
+
+/* ── Typewriter Cursor Blink ── */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-cursor {
+  animation: cursorBlink 0.8s infinite;
+}
