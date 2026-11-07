@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon, Download } from 'lucide-react';
 import { portfolioData } from '../data/portfolio';
 import { useTheme } from '../context/ThemeContext';
 
@@ -92,10 +92,14 @@ export default function Header() {
           </button>
 
           <a
-            className="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary text-on-primary text-xs font-mono font-medium hover:opacity-90 transition-all shadow-sm shadow-primary/20"
-            href="#contact"
+            className="hidden sm:inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-primary text-on-primary text-xs font-mono font-medium hover:opacity-90 transition-all shadow-sm shadow-primary/20"
+            href="./cv.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            download="CV-Muhammad-Fajrian-Sidiq.pdf"
           >
-            Hubungi Saya
+            <Download size={13} />
+            <span>Unduh CV</span>
           </a>
 
           {/* Mobile menu toggle */}
@@ -122,6 +126,17 @@ export default function Header() {
               {link.label}
             </a>
           ))}
+          <a
+            className="mt-2 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-on-primary text-xs font-mono font-medium hover:opacity-90 transition-all shadow-sm"
+            href="./cv.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            download="CV-Muhammad-Fajrian-Sidiq.pdf"
+            onClick={() => setMobileOpen(false)}
+          >
+            <Download size={14} />
+            <span>Unduh CV</span>
+          </a>
         </nav>
       )}
     </header>
